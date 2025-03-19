@@ -1,21 +1,31 @@
 import 'package:flutter/material.dart';
-import '../widgets/styles.dart';
+import '../../widgets/styles.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          
           SingleChildScrollView(
-            padding: EdgeInsets.only(top: 120, right: 16, left: 16),
+            padding: EdgeInsets.only(right: 16, left: 16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
+                SizedBox(height: 35),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    style: Styles.btnIconBack,
+                    icon: Icon(Icons.keyboard_arrow_left),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                SizedBox(height: 35),
                 Center(
                   child: Text(
                     'Bienvenid@ de nuevo!',
@@ -24,7 +34,7 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(height: 35),
 
-                // Botón de Facebook
+                //* Botón de Facebook
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
@@ -55,6 +65,7 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(height: 25),
 
+                //* Botón de Google
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
@@ -85,10 +96,7 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(height: 25),
 
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/'); 
-                  },
+                Center(
                   child: const Text(
                     'O INICIA CON TU EMAIL',
                     style: Styles.textMuted,
@@ -96,15 +104,13 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(height: 25),
 
-                // Campo de Email
                 SizedBox(
                   width: double.infinity,
                   child: TextField(
                     style: Styles.textField,
                     decoration: Styles.inputDecoration.copyWith(
                       hintText: 'Email',
-                      hintStyle: TextStyle(
-                          color: Colors.grey),
+                      hintStyle: TextStyle(color: Colors.grey),
                     ),
                     onChanged: (text) {
                       print("Email");
@@ -113,15 +119,13 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
 
-                // Campo de Contraseña
                 SizedBox(
                   width: double.infinity,
                   child: TextField(
                     style: Styles.textField,
                     decoration: Styles.inputDecoration.copyWith(
                       hintText: 'Contraseña',
-                      hintStyle: TextStyle(
-                          color: Colors.grey), 
+                      hintStyle: TextStyle(color: Colors.grey),
                     ),
                     onChanged: (text) {
                       print("Contraseña");
@@ -130,12 +134,11 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(height: 35),
 
-                // Botón de Ingresar
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/'); // Navega a Home
+                      Navigator.pushNamed(context, '/introduction');
                     },
                     style: Styles.btn,
                     child: const Text(
@@ -146,12 +149,11 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
 
-                // Botón de Olvidaste tu contraseña
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/'); // Navega a Home
+                      Navigator.pushNamed(context, '/');
                     },
                     style: Styles.btnSecundary,
                     child: const Text(
@@ -160,7 +162,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Botón para registrarse
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -170,7 +172,7 @@ class Home extends StatelessWidget {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/'); // Navega a Home
+                          Navigator.pushNamed(context, '/create');
                         },
                         style: Styles.btnSecundary,
                         child: Text(
@@ -184,19 +186,17 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
-
-          // Botón de retroceso en la parte superior
-          Positioned(
-            top: 30,
-            left: 16,
-            child: IconButton(
-              style: Styles.btnIcon,
-              icon: Icon(Icons.keyboard_arrow_left),
-              onPressed: () {
-                Navigator.pop(context); // Regresa a la página anterior
-              },
-            ),
-          ),
+          // Positioned(
+          //   top: 30,
+          //   left: 16,
+          //   child: IconButton(
+          //     style: Styles.btnIcon,
+          //     icon: Icon(Icons.keyboard_arrow_left),
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );
