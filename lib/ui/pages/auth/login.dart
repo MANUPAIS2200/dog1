@@ -9,6 +9,15 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          Positioned(
+            child: SizedBox(
+              width: double.infinity, // Toma todo el ancho disponible
+              child: Image.asset(
+                'assets/fondo.png',
+                fit: BoxFit.cover, // Ajusta la imagen para cubrir el espacio
+              ),
+            ),
+          ),
           SingleChildScrollView(
             padding: EdgeInsets.only(right: 16, left: 16),
             child: Column(
@@ -138,7 +147,7 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/introduction');
+                      Navigator.pushNamed(context, '/info_profile');
                     },
                     style: Styles.btn,
                     child: const Text(
@@ -153,7 +162,7 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/');
+                      Navigator.pushNamed(context, '/new_pass');
                     },
                     style: Styles.btnSecundary,
                     child: const Text(
@@ -185,18 +194,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          // Positioned(
-          //   top: 30,
-          //   left: 16,
-          //   child: IconButton(
-          //     style: Styles.btnIcon,
-          //     icon: Icon(Icons.keyboard_arrow_left),
-          //     onPressed: () {
-          //       Navigator.pop(context);
-          //     },
-          //   ),
-          // ),
+          )
         ],
       ),
     );

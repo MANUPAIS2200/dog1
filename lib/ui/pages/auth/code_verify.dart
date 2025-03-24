@@ -10,6 +10,15 @@ class CodeVefiry extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          Positioned(
+            child: SizedBox(
+              width: double.infinity, // Toma todo el ancho disponible
+              child: Image.asset(
+                'assets/fondo.png',
+                fit: BoxFit.cover, // Ajusta la imagen para cubrir el espacio
+              ),
+            ),
+          ),
           Center(
             child: Column(
               children: [
@@ -170,17 +179,6 @@ class CodeVefiry extends StatelessWidget {
               ],
             ),
           )
-          // Positioned(
-          //   top: 30,
-          //   left: 16,
-          //   child: IconButton(
-          //     style: Styles.btnIconBack,
-          //     icon: Icon(Icons.keyboard_arrow_left),
-          //     onPressed: () {
-          //       Navigator.pop(context);
-          //     },
-          //   ),
-          // ),
         ],
       ),
     );

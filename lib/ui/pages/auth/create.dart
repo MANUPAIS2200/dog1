@@ -16,6 +16,15 @@ class _CreateUserState extends State<CreateUser> {
     return Scaffold(
       body: Stack(
         children: [
+          Positioned(
+            child: SizedBox(
+              width: double.infinity, // Toma todo el ancho disponible
+              child: Image.asset(
+                'assets/fondo.png',
+                fit: BoxFit.cover, // Ajusta la imagen para cubrir el espacio
+              ),
+            ),
+          ),
           SingleChildScrollView(
             padding: EdgeInsets.only(right: 16, left: 16),
             child: Column(
@@ -190,12 +199,15 @@ class _CreateUserState extends State<CreateUser> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "He leído y acepto los términos y condiciones de uso",
-                        style: Styles.textAttention,
+                      Expanded(
+                        child: Text(
+                          "He leído y acepto los términos y condiciones de uso",
+                          style: Styles.textAttention,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                       Transform.scale(
-                        scale: 1.5, // Aumenta el tamaño del checkbox
+                        scale: 1.5,
                         child: Checkbox(
                           value: isChecked,
                           onChanged: (bool? value) {
@@ -225,18 +237,7 @@ class _CreateUserState extends State<CreateUser> {
                 ),
               ],
             ),
-          ),
-          // Positioned(
-          //   top: 30,
-          //   left: 16,
-          //   child: IconButton(
-          //     style: Styles.btnIconBack,
-          //     icon: Icon(Icons.keyboard_arrow_left),
-          //     onPressed: () {
-          //       Navigator.pop(context);
-          //     },
-          //   ),
-          // ),
+          )
         ],
       ),
     );

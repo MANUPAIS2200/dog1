@@ -57,7 +57,7 @@ class Styles {
   static InputDecoration inputDecoration = InputDecoration(
     labelStyle: labelStyle, // Estilo para la etiqueta
     filled: true,
-    fillColor: const Color.fromARGB(255, 0, 51, 255),
+    fillColor: const Color.fromARGB(255, 242, 243, 247),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(12.0)),
       borderSide: BorderSide.none,
