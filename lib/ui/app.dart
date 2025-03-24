@@ -5,6 +5,8 @@ import 'pages/auth/login.dart';
 import 'pages/auth/create.dart';
 import 'pages/auth/sign_up_in.dart';
 import 'pages/auth/code_verify.dart';
+import 'pages/auth/new_pass.dart';
+import 'pages/auth/info_profile.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -20,11 +22,14 @@ class MyApp extends StatelessWidget {
         '/create': (context) => const CreateUser(),
         '/sign_up_in': (context) => const SignUpIn(),
         '/code_vefiry': (context) => const CodeVefiry(),
+        '/new_pass': (context) => const NewPass(),
+        '/info_profile': (context) => const InfoProfile(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.poppinsTextTheme(),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
     );
   }
