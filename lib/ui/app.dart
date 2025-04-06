@@ -7,6 +7,8 @@ import 'pages/auth/sign_up_in.dart';
 import 'pages/auth/code_verify.dart';
 import 'pages/auth/new_pass.dart';
 import 'pages/auth/info_profile.dart';
+import 'pages/auth/welcome.dart';
+import 'pages/home/home.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,8 +17,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Black Dog',
-      initialRoute: '/introduction',
+      initialRoute: '/welcome',
       routes: {
+        //* Login
         '/login': (context) => const LoginPage(),
         '/introduction': (context) => const Introduction(),
         '/create': (context) => const CreateUser(),
@@ -24,6 +27,10 @@ class MyApp extends StatelessWidget {
         '/code_vefiry': (context) => const CodeVefiry(),
         '/new_pass': (context) => const NewPass(),
         '/info_profile': (context) => const InfoProfile(),
+        '/welcome': (context) => const Welcome(),
+
+        //* Home
+        '/home': (context) => MyHomePage(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

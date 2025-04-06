@@ -196,8 +196,7 @@ class _InfoProfileState extends State<InfoProfile> {
                               return SuccessModal(
                                 onConfirm: () {
                                   Navigator.pop(context); // Cierra el modal
-                                  Navigator.pushNamed(context,
-                                      '/code_verify'); // Redirige a otra pantalla
+                                  Navigator.pushNamed(context, '/welcome');
                                 },
                               );
                             },
