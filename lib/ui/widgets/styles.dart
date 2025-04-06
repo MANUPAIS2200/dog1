@@ -15,6 +15,9 @@ class Styles {
   static const TextStyle textAttention =
       TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 79, 79));
 
+  static const TextStyle textWhite =
+      TextStyle(color: Color.fromARGB(255, 255, 255, 255));
+
   static final ButtonStyle btn = TextButton.styleFrom(
     backgroundColor: const Color.fromARGB(255, 143, 151, 252),
     foregroundColor: Colors.white,
@@ -26,6 +29,16 @@ class Styles {
   );
 
   static final ButtonStyle btnSecundary = TextButton.styleFrom(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50),
+    ),
+    foregroundColor: Colors.black87,
+    padding: const EdgeInsets.symmetric(
+        vertical: 25.0), // Padding en el eje Y (vertical)
+  );
+
+  static final ButtonStyle btnWhite = TextButton.styleFrom(
+    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(50),
     ),

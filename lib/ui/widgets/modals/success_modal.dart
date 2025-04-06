@@ -1,3 +1,4 @@
+import 'package:dog1/ui/widgets/styles.dart';
 import 'package:flutter/material.dart';
 
 class SuccessModal extends StatelessWidget {
@@ -11,22 +12,32 @@ class SuccessModal extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      title: Center(child: Text("¡Perfil completado! 🎉")),
+      title: Center(
+          child: Icon(Icons.check_circle,
+              color: Color.fromARGB(255, 143, 151, 252), size: 100)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.check_circle, color: Colors.green, size: 50),
+          Text(
+            "Success",
+            style: Styles.headline,
+          ),
           SizedBox(height: 10),
           Text(
-            "Tu perfil ha sido completado exitosamente.",
+            "Tu perfil ha sido completado exitosamente",
             textAlign: TextAlign.center,
+            style: Styles.textMuted,
           ),
         ],
       ),
       actions: [
-        TextButton(
-          onPressed: onConfirm,
-          child: Text("Aceptar"),
+        SizedBox(
+          width: double.infinity,
+          child: TextButton(
+            onPressed: onConfirm,
+            style: Styles.btn,
+            child: Text("HECHO"),
+          ),
         ),
       ],
     );
