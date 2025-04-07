@@ -44,6 +44,22 @@ class MyHomePageState extends State<MyHomePage> {
             ),
           ),
 
+          //* Boton para el parque
+          Positioned(
+            left: 40,
+            bottom: 40,
+            child: IconButton(
+              icon: Image.asset(
+                "assets/home/ARBOL.png",
+                width: 80,
+                fit: BoxFit.contain,
+              ),
+              onPressed: () {
+                print("Botón presionado");
+              },
+            ),
+          ),
+
           //* Menu Minijuegos
           Positioned(
               right: 40,
@@ -214,16 +230,64 @@ class MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Buscar'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
-        ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 190, 212, 255),
+          boxShadow: [
+            BoxShadow(color: Colors.black26, blurRadius: 10),
+          ],
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: [
+            BottomNavigationBarItem(
+              backgroundColor: Colors.transparent,
+              icon: Image.asset(
+                "assets/home/shop.png",
+                width: 80,
+                fit: BoxFit.contain,
+              ),
+              label: 'Inicio',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/home/notes.png",
+                width: 75,
+                fit: BoxFit.contain,
+              ),
+              label: 'Inicio',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/home/home.png",
+                width: 60,
+                fit: BoxFit.contain,
+              ),
+              label: 'Inicio',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/home/musica.png",
+                width: 60,
+                fit: BoxFit.contain,
+              ),
+              label: 'Inicio',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/home/meditacion.png",
+                width: 80,
+                fit: BoxFit.contain,
+              ),
+              label: 'Inicio',
+            ),
+          ],
+        ),
       ),
     );
   }
