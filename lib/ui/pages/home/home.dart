@@ -3,7 +3,7 @@ import 'package:dog1/ui/widgets/home/bottom_nav_bar.dart';
 import 'package:dog1/ui/widgets/home/btn_park.dart';
 import 'package:dog1/ui/widgets/home/popup_minigames.dart';
 import 'package:flutter/material.dart';
-import 'package:babylonjs_viewer/babylonjs_viewer.dart';
+//import 'package:babylonjs_viewer/babylonjs_viewer.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
