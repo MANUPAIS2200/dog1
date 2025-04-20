@@ -1,8 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../widgets/styles.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool _isLoading = false;
+
+  Future<void> _loginWithEmail() async {
+    final email = _emailController.text.trim();
+    final pass = _passController.text.trim();
+
+    // Validaciones
+    if (email.isEmpty || pass.isEmpty) {
+      _showError('Por favor completa todos los campos.');
+      return;
+    }
+
+    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+      _showError('El email no tiene un formato válido.');
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: pass);
+      Navigator.pushReplacementNamed(context, '/info_profile');
+    } on FirebaseAuthException catch (e) {
+      String message = 'Ocurrió un error al iniciar sesión.';
+      if (e.code == 'user-not-found') {
+        message = 'No existe una cuenta con ese email.';
+      } else if (e.code == 'wrong-password') {
+        message = 'La contraseña es incorrecta.';
+      }
+      _showError(message);
+    } catch (e) {
+      _showError('Error inesperado: ${e.toString()}');
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  void _showError(String message) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("Error"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,39 +81,38 @@ class LoginPage extends StatelessWidget {
         children: [
           Positioned(
             child: SizedBox(
-              width: double.infinity, // Toma todo el ancho disponible
+              width: double.infinity,
               child: Image.asset(
                 'assets/fondo.png',
-                fit: BoxFit.cover, // Ajusta la imagen para cubrir el espacio
+                fit: BoxFit.cover,
               ),
             ),
           ),
+          if (_isLoading) const Center(child: CircularProgressIndicator()),
           SingleChildScrollView(
-            padding: EdgeInsets.only(right: 16, left: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     style: Styles.btnIconBack,
-                    icon: Icon(Icons.keyboard_arrow_left),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    icon: const Icon(Icons.keyboard_arrow_left),
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 Center(
                   child: Text(
                     'Bienvenid@ de nuevo!',
                     style: Styles.headline,
                   ),
                 ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
-                //* Botón de Facebook
+                // Facebook (no implementado aún)
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
@@ -72,9 +141,9 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
-                //* Botón de Google
+                // Google (no implementado aún)
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
@@ -103,52 +172,42 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
-                Center(
-                  child: const Text(
+                const Center(
+                  child: Text(
                     'O INICIA CON TU EMAIL',
                     style: Styles.textMuted,
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
-                SizedBox(
-                  width: double.infinity,
-                  child: TextField(
-                    style: Styles.textField,
-                    decoration: Styles.inputDecoration.copyWith(
-                      hintText: 'Email',
-                      hintStyle: TextStyle(color: Colors.grey),
-                    ),
-                    onChanged: (text) {
-                      print("Email");
-                    },
+                TextField(
+                  controller: _emailController,
+                  style: Styles.textField,
+                  decoration: Styles.inputDecoration.copyWith(
+                    hintText: 'Email',
+                    hintStyle: const TextStyle(color: Colors.grey),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 20),
+
+                TextField(
+                  controller: _passController,
+                  obscureText: true,
+                  style: Styles.textField,
+                  decoration: Styles.inputDecoration.copyWith(
+                    hintText: 'Contraseña',
+                    hintStyle: const TextStyle(color: Colors.grey),
                   ),
                 ),
-                SizedBox(height: 20),
-
-                SizedBox(
-                  width: double.infinity,
-                  child: TextField(
-                    style: Styles.textField,
-                    decoration: Styles.inputDecoration.copyWith(
-                      hintText: 'Contraseña',
-                      hintStyle: TextStyle(color: Colors.grey),
-                    ),
-                    onChanged: (text) {
-                      print("Contraseña");
-                    },
-                  ),
-                ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/info_profile');
-                    },
+                    onPressed: _loginWithEmail,
                     style: Styles.btn,
                     child: const Text(
                       'INICIAR SESIÓN',
@@ -156,7 +215,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
 
                 SizedBox(
                   width: double.infinity,
@@ -176,25 +235,27 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "TODAVIA NO TIENES UNA CUENTA?",
+                      "TODAVÍA NO TIENES UNA CUENTA?",
                       style: Styles.textMuted,
                     ),
                     TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/create');
-                        },
-                        style: Styles.btnSecundary,
-                        child: Text(
-                          ' REGISTRATE',
-                          style: Styles.textMuted.copyWith(
-                              color: Color.fromARGB(255, 143, 151, 252),
-                              fontWeight: FontWeight.bold),
-                        )),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/create');
+                      },
+                      style: Styles.btnSecundary,
+                      child: Text(
+                        ' REGÍSTRATE',
+                        style: Styles.textMuted.copyWith(
+                          color: const Color.fromARGB(255, 143, 151, 252),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

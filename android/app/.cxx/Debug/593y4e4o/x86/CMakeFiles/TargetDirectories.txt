@@ -1,0 +1,2 @@
+C:/Users/manup/OneDrive/Desktop/dog2/android/app/.cxx/Debug/593y4e4o/x86/CMakeFiles/edit_cache.dir
+C:/Users/manup/OneDrive/Desktop/dog2/android/app/.cxx/Debug/593y4e4o/x86/CMakeFiles/rebuild_cache.dir
