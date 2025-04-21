@@ -3,6 +3,7 @@ import 'package:dog1/ui/widgets/home/bottom_nav_bar.dart';
 import 'package:dog1/ui/widgets/home/btn_park.dart';
 import 'package:dog1/ui/widgets/home/popup_minigames.dart';
 import 'package:flutter/material.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 //import 'package:babylonjs_viewer/babylonjs_viewer.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -42,9 +43,12 @@ class MyHomePageState extends State<MyHomePage> {
 
             //* Contenido
             Center(
-              child: Image.asset(
-                'assets/home/dog_home.png',
-                fit: BoxFit.contain,
+              child: ModelViewer(
+                src: 'assets/models/dog.glb',
+                alt: "Un modelo 3D",
+                ar: true,
+                autoRotate: true,
+                cameraControls: true,
               ),
             ),
 
