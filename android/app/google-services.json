@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "56402290904",
+    "project_id": "blackdog-dev-6104f",
+    "storage_bucket": "blackdog-dev-6104f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56402290904:android:aed4c5ade249bb0c8c0fad",
+        "android_client_info": {
+          "package_name": "com.example.dog1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56402290904-b5a7o7vsc4sqlpgha1meprv8o5ecknqi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dog1",
+            "certificate_hash": "b529c78bec767f7b5025a3af248de3d878145d5f"
+          }
+        },
+        {
+          "client_id": "56402290904-gbd1qs7h6lo95cbvlf8ron4b1b900pq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD82lksoj6AlzInS0H-Zm9h45cE9hdnAOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56402290904-gbd1qs7h6lo95cbvlf8ron4b1b900pq9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "56402290904-gj3npej1b4234avk49dutrdv1au51ao5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dog1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

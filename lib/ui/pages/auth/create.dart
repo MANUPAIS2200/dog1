@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../widgets/styles.dart';
+import 'package:dog1/services/firebase_service.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateUser extends StatefulWidget {
   const CreateUser({super.key});
@@ -11,6 +14,11 @@ class CreateUser extends StatefulWidget {
 class _CreateUserState extends State<CreateUser> {
   bool isChecked = false;
   bool _obscureText = true;
+  final _nombreController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  final FirebaseService _firebaseService = FirebaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,8 +65,29 @@ class _CreateUserState extends State<CreateUser> {
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/');
+                    onPressed: () async {
+                      if (isChecked) {
+                        String? error = await _firebaseService.registerUser(
+                          nombre: _nombreController.text.trim(),
+                          email: _emailController.text.trim(),
+                          password: _passwordController.text.trim(),
+                        );
+
+                        if (error == null) {
+                          Navigator.pushNamed(
+                              context, '/home'); // O el screen que quieras
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(error)),
+                          );
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(
+                                  'Debes aceptar los términos y condiciones.')),
+                        );
+                      }
                     },
                     style: Styles.btn,
                     child: Stack(
@@ -84,12 +113,19 @@ class _CreateUserState extends State<CreateUser> {
                 ),
                 SizedBox(height: 25),
 
-                //* Botón de Facebook
+                //* Botón de google
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/');
+                    onPressed: () async {
+                      final service = FirebaseService();
+                      final error = await service.signInWithGoogle(context);
+
+                      if (error != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(error)),
+                        );
+                      }
                     },
                     style: Styles.btnSecundary,
                     child: Stack(
@@ -127,6 +163,7 @@ class _CreateUserState extends State<CreateUser> {
                 SizedBox(
                   width: double.infinity,
                   child: TextField(
+                    controller: _nombreController,
                     style: Styles.textField,
                     decoration: Styles.inputDecoration.copyWith(
                       hintText: 'Nombre',
@@ -147,6 +184,7 @@ class _CreateUserState extends State<CreateUser> {
                 SizedBox(
                   width: double.infinity,
                   child: TextField(
+                    controller: _emailController,
                     style: Styles.textField,
                     decoration: Styles.inputDecoration.copyWith(
                       hintText: 'Email',
@@ -167,6 +205,7 @@ class _CreateUserState extends State<CreateUser> {
                 SizedBox(
                   width: double.infinity,
                   child: TextField(
+                    controller: _passwordController,
                     obscureText:
                         _obscureText, // Controla si se oculta o muestra el texto
                     style: Styles.textField,
@@ -225,8 +264,30 @@ class _CreateUserState extends State<CreateUser> {
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/code_vefiry');
+                    onPressed: () async {
+                      if (isChecked) {
+                        String? error = await _firebaseService.registerUser(
+                          nombre: _nombreController.text.trim(),
+                          email: _emailController.text.trim(),
+                          password: _passwordController.text.trim(),
+                        );
+
+                        if (error == null) {
+                          Navigator.pushNamed(
+                              context, '/home'); // O la pantalla de bienvenida
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(error)),
+                          );
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                'Debes aceptar los términos y condiciones.'),
+                          ),
+                        );
+                      }
                     },
                     style: Styles.btn,
                     child: const Text(
