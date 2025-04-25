@@ -56,7 +56,7 @@ class Welcome extends StatelessWidget {
                         style: Styles.btnWhite,
                         child: const Text(
                           'EMPECEMOS',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

@@ -41,13 +41,16 @@ class MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
+            //* App bar top
+            AppBarHome(),
+
             //* Contenido
             Center(
               child: ModelViewer(
                 src: 'assets/models/dog.glb',
                 alt: "Un modelo 3D",
                 ar: true,
-                autoRotate: true,
+                autoRotate: false,
                 cameraControls: true,
               ),
             ),
@@ -57,8 +60,6 @@ class MyHomePageState extends State<MyHomePage> {
 
             //* Menu Minijuegos
             PopupMinigames(),
-
-            AppBarHome()
           ],
         ),
         bottomNavigationBar: BottomNavBarHome(

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 class Styles {
   static const TextStyle headline = TextStyle(
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: FontWeight.bold,
     color: Colors.black,
   );
 
-  static const TextStyle text = TextStyle(fontSize: 18, color: Colors.black);
+  static const TextStyle text = TextStyle(color: Colors.black);
 
   static const TextStyle textMuted =
-      TextStyle(fontSize: 18, color: Color.fromARGB(127, 0, 0, 0));
+      TextStyle(color: Color.fromARGB(127, 0, 0, 0));
 
   static const TextStyle textAttention =
-      TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 79, 79));
+      TextStyle(color: Color.fromARGB(255, 255, 79, 79));
 
   static const TextStyle textWhite =
       TextStyle(color: Color.fromARGB(255, 255, 255, 255));
@@ -24,8 +24,7 @@ class Styles {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(50),
     ),
-    padding: const EdgeInsets.symmetric(
-        vertical: 25.0), // Padding en el eje Y (vertical)
+    padding: const EdgeInsets.symmetric(vertical: 20.0),
   );
 
   static final ButtonStyle btnSecundary = TextButton.styleFrom(
@@ -33,8 +32,7 @@ class Styles {
       borderRadius: BorderRadius.circular(50),
     ),
     foregroundColor: Colors.black87,
-    padding: const EdgeInsets.symmetric(
-        vertical: 25.0), // Padding en el eje Y (vertical)
+    padding: const EdgeInsets.symmetric(vertical: 20.0),
   );
 
   static final ButtonStyle btnWhite = TextButton.styleFrom(
@@ -43,8 +41,7 @@ class Styles {
       borderRadius: BorderRadius.circular(50),
     ),
     foregroundColor: Colors.black87,
-    padding: const EdgeInsets.symmetric(
-        vertical: 25.0), // Padding en el eje Y (vertical)
+    padding: const EdgeInsets.symmetric(vertical: 20.0),
   );
 
   static final ButtonStyle btnIconBack = IconButton.styleFrom(
@@ -59,11 +56,9 @@ class Styles {
     iconSize: 50.0,
   );
 
-  static const TextStyle textField =
-      TextStyle(fontSize: 16, color: Colors.black, height: 2);
+  static const TextStyle textField = TextStyle(color: Colors.black, height: 2);
 
   static const TextStyle labelStyle = TextStyle(
-    fontSize: 18,
     color: Color.fromARGB(255, 158, 158, 158),
   );
 

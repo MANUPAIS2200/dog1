@@ -168,7 +168,7 @@ class CodeVefiry extends StatelessWidget {
                             style: Styles.btn,
                             child: const Text(
                               'VERIFICAR',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),

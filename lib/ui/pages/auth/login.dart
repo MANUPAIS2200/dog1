@@ -37,7 +37,8 @@ class _LoginPageState extends State<LoginPage> {
       await _auth.signInWithEmailAndPassword(email: email, password: pass);
       Navigator.pushReplacementNamed(context, '/info_profile');
     } on FirebaseAuthException catch (e) {
-      String message = 'Ocurrió un error al iniciar sesión.';
+      String message =
+          'Ocurrió un error al iniciar sesión. Por motivos de desarrollo se pasara a la siguiente pagina';
       if (e.code == 'user-not-found') {
         message = 'No existe una cuenta con ese email.';
       } else if (e.code == 'wrong-password') {
@@ -59,7 +60,11 @@ class _LoginPageState extends State<LoginPage> {
         content: Text(message),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pop(context); // Cierra el diálogo actual
+              Navigator.pushReplacementNamed(
+                  context, '/info_profile'); // Navega a la nueva ruta
+            },
             child: const Text("OK"),
           )
         ],
@@ -135,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const Text(
                           'CONTINUAR CON FACEBOOK',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -166,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const Text(
                           'CONTINUAR CON GOOGLE',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -189,7 +194,6 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'Email',
                     hintStyle: const TextStyle(color: Colors.grey),
                   ),
-                  keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 20),
 
@@ -211,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: Styles.btn,
                     child: const Text(
                       'INICIAR SESIÓN',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -224,10 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.pushNamed(context, '/new_pass');
                     },
                     style: Styles.btnSecundary,
-                    child: const Text(
-                      '¿Olvidaste tu contraseña?',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    child: const Text('¿Olvidaste tu contraseña?'),
                   ),
                 ),
 

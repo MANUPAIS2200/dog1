@@ -21,14 +21,14 @@ class _InfoProfileState extends State<InfoProfile> {
         children: [
           Positioned(
             child: SizedBox(
-              width: double.infinity, // Toma todo el ancho disponible
+              width: double.infinity,
               child: Image.asset(
                 'assets/fondo.png',
-                fit: BoxFit.cover, // Ajusta la imagen para cubrir el espacio
+                fit: BoxFit.cover,
               ),
             ),
           ),
-          Center(
+          SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(right: 16, left: 16),
               child: Column(
@@ -66,13 +66,9 @@ class _InfoProfileState extends State<InfoProfile> {
 
                   //* Nombre
                   Container(
-                    width:
-                        double.infinity, // Hace que ocupe todo el ancho posible
-                    alignment: Alignment.centerLeft, // Alinea a la derecha
-                    child: Text(
-                      "Nombre",
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    width: double.infinity,
+                    alignment: Alignment.centerLeft,
+                    child: Text("Nombre"),
                   ),
                   SizedBox(height: 8),
                   SizedBox(
@@ -91,13 +87,9 @@ class _InfoProfileState extends State<InfoProfile> {
 
                   //* Input Numero de Telefono
                   Container(
-                    width:
-                        double.infinity, // Hace que ocupe todo el ancho posible
-                    alignment: Alignment.centerLeft, // Alinea a la derecha
-                    child: Text(
-                      "Número de teléfono",
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    width: double.infinity,
+                    alignment: Alignment.centerLeft,
+                    child: Text("Número de teléfono"),
                   ),
                   SizedBox(height: 8),
                   Container(
@@ -142,13 +134,9 @@ class _InfoProfileState extends State<InfoProfile> {
 
                   //* Input Sexo
                   Container(
-                    width:
-                        double.infinity, // Hace que ocupe todo el ancho posible
-                    alignment: Alignment.centerLeft, // Alinea a la derecha
-                    child: Text(
-                      "Sexo",
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    width: double.infinity,
+                    alignment: Alignment.centerLeft,
+                    child: Text("Sexo"),
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -206,7 +194,7 @@ class _InfoProfileState extends State<InfoProfile> {
                       style: Styles.btn,
                       child: const Text(
                         'COMPLETAR PERFIL',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

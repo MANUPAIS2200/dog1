@@ -30,7 +30,7 @@ class SignUpIn extends StatelessWidget {
                 style: Styles.btn,
                 child: const Text(
                   'SIGUIENTE',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
