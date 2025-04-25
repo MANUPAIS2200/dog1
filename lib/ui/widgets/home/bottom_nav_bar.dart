@@ -31,7 +31,7 @@ class BottomNavBarHome extends StatelessWidget {
             backgroundColor: Colors.transparent,
             icon: Image.asset(
               "assets/home/shop.png",
-              width: 80,
+              width: 60,
               fit: BoxFit.contain,
             ),
             label: 'Inicio',
@@ -39,7 +39,7 @@ class BottomNavBarHome extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Image.asset(
               "assets/home/notes.png",
-              width: 75,
+              width: 65,
               fit: BoxFit.contain,
             ),
             label: 'Inicio',
@@ -47,7 +47,7 @@ class BottomNavBarHome extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Image.asset(
               "assets/home/home.png",
-              width: 60,
+              width: 50,
               fit: BoxFit.contain,
             ),
             label: 'Inicio',
@@ -55,7 +55,7 @@ class BottomNavBarHome extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Image.asset(
               "assets/home/musica.png",
-              width: 60,
+              width: 50,
               fit: BoxFit.contain,
             ),
             label: 'Inicio',
@@ -63,7 +63,7 @@ class BottomNavBarHome extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Image.asset(
               "assets/home/meditacion.png",
-              width: 80,
+              width: 60,
               fit: BoxFit.contain,
             ),
             label: 'Inicio',

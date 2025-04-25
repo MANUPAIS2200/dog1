@@ -113,7 +113,7 @@ class _IntroductionState extends State<Introduction> {
                     style: Styles.btn,
                     child: const Text(
                       'Sign up',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -127,7 +127,7 @@ class _IntroductionState extends State<Introduction> {
                     style: Styles.btnSecundary,
                     child: const Text(
                       'Log in',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

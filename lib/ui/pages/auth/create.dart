@@ -26,10 +26,10 @@ class _CreateUserState extends State<CreateUser> {
         children: [
           Positioned(
             child: SizedBox(
-              width: double.infinity, // Toma todo el ancho disponible
+              width: double.infinity,
               child: Image.asset(
                 'assets/fondo.png',
-                fit: BoxFit.cover, // Ajusta la imagen para cubrir el espacio
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -74,8 +74,7 @@ class _CreateUserState extends State<CreateUser> {
                         );
 
                         if (error == null) {
-                          Navigator.pushNamed(
-                              context, '/home'); // O el screen que quieras
+                          Navigator.pushNamed(context, '/home');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(error)),
@@ -105,7 +104,7 @@ class _CreateUserState extends State<CreateUser> {
                         ),
                         const Text(
                           'CONTINUAR CON FACEBOOK',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -143,7 +142,7 @@ class _CreateUserState extends State<CreateUser> {
                         ),
                         const Text(
                           'CONTINUAR CON GOOGLE',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -273,8 +272,7 @@ class _CreateUserState extends State<CreateUser> {
                         );
 
                         if (error == null) {
-                          Navigator.pushNamed(
-                              context, '/home'); // O la pantalla de bienvenida
+                          Navigator.pushNamed(context, '/home');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(error)),
@@ -292,7 +290,7 @@ class _CreateUserState extends State<CreateUser> {
                     style: Styles.btn,
                     child: const Text(
                       'EMPECEMOS',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

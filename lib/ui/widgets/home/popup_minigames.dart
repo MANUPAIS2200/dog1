@@ -6,8 +6,8 @@ class PopupMinigames extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        right: 40,
-        bottom: 40,
+        right: 30,
+        bottom: 30,
         child: Theme(
           data: Theme.of(context).copyWith(
             popupMenuTheme: PopupMenuThemeData(
@@ -21,7 +21,7 @@ class PopupMinigames extends StatelessWidget {
             offset: Offset(0, -150),
             icon: Image.asset(
               "assets/home/minijuegos.png",
-              width: 100,
+              width: 80,
               fit: BoxFit.contain,
             ),
             onSelected: (String value) {
@@ -34,7 +34,7 @@ class PopupMinigames extends StatelessWidget {
                   child: IconButton(
                     icon: Image.asset(
                       "assets/home/baño.png",
-                      width: 65,
+                      width: 55,
                       fit: BoxFit.cover,
                     ),
                     onPressed: () {
@@ -49,7 +49,7 @@ class PopupMinigames extends StatelessWidget {
                   child: IconButton(
                     icon: Image.asset(
                       "assets/home/juegos.png",
-                      width: 65,
+                      width: 55,
                       fit: BoxFit.cover,
                     ),
                     onPressed: () {
@@ -64,7 +64,7 @@ class PopupMinigames extends StatelessWidget {
                   child: IconButton(
                     icon: Image.asset(
                       "assets/home/comida.png",
-                      width: 65,
+                      width: 55,
                       fit: BoxFit.cover,
                     ),
                     onPressed: () {

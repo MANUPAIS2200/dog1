@@ -6,12 +6,12 @@ class BtnPark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      left: 40,
-      bottom: 40,
+      left: 30,
+      bottom: 30,
       child: IconButton(
         icon: Image.asset(
           "assets/home/ARBOL.png",
-          width: 80,
+          width: 65,
           fit: BoxFit.contain,
         ),
         onPressed: () {

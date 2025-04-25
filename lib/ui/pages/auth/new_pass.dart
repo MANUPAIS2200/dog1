@@ -67,10 +67,7 @@ class _NewPassState extends State<NewPass> {
                     width:
                         double.infinity, // Hace que ocupe todo el ancho posible
                     alignment: Alignment.centerLeft, // Alinea a la derecha
-                    child: Text(
-                      "Contraseña",
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    child: Text("Contraseña"),
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -108,10 +105,7 @@ class _NewPassState extends State<NewPass> {
                     width:
                         double.infinity, // Hace que ocupe todo el ancho posible
                     alignment: Alignment.centerLeft, // Alinea a la derecha
-                    child: Text(
-                      "Confirmar contraseña",
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    child: Text("Confirmar contraseña"),
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -153,7 +147,7 @@ class _NewPassState extends State<NewPass> {
                       style: Styles.btn,
                       child: const Text(
                         'CREAR NUEVA CONTRASEÑA',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   )

@@ -36,7 +36,10 @@ class SuccessModal extends StatelessWidget {
           child: TextButton(
             onPressed: onConfirm,
             style: Styles.btn,
-            child: Text("HECHO"),
+            child: Text(
+              "HECHO",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ],

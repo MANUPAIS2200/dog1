@@ -9,7 +9,7 @@ class AppBarHome extends StatelessWidget {
       children: [
         AppBar(
           backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-          toolbarHeight: 80,
+          toolbarHeight: 65,
           title: Row(
             children: [
               Expanded(
@@ -45,7 +45,7 @@ class AppBarHome extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 4,
+                flex: 2,
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text('18500', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -65,7 +65,7 @@ class AppBarHome extends StatelessWidget {
                     child: PopupMenuButton<String>(
                       icon: Icon(
                         Icons.menu_rounded,
-                        size: 75,
+                        size: 50,
                         color: Color.fromARGB(255, 45, 77, 109),
                       ),
                       offset: Offset(0, 70),
@@ -80,7 +80,7 @@ class AppBarHome extends StatelessWidget {
                             child: IconButton(
                               icon: Icon(
                                 Icons.settings,
-                                size: 50,
+                                size: 40,
                                 color: Color.fromARGB(255, 45, 77, 109),
                               ),
                               onPressed: () {
