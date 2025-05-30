@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart'; // Generado por `flutterfire configure`
+import 'firebase_options.dart';
 import 'ui/app.dart';
 
 void main() async {
@@ -8,6 +8,5 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-      const MyApp()); // Acordate de poner const si usás constructor constante
+  runApp(const MyApp());
 }

@@ -53,7 +53,7 @@ class PopupMinigames extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     onPressed: () {
-                      print("Botón presionado");
+                      Navigator.pushReplacementNamed(context, '/minigames');
                     },
                   ),
                 ),
