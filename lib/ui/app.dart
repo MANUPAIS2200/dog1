@@ -9,6 +9,9 @@ import 'pages/auth/new_pass.dart';
 import 'pages/auth/info_profile.dart';
 import 'pages/auth/welcome.dart';
 import 'pages/home/home.dart';
+import 'pages/home/daily_reward.dart';
+import 'pages/home/lista.dart';
+import 'pages/minigames/minigames.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,9 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Black Dog',
-      initialRoute: '/sign_up_in',
+      initialRoute: '/minigames',
       routes: {
-        //* Login
+        //* Login y registro
         '/login': (context) => const LoginPage(),
         '/introduction': (context) => const Introduction(),
         '/create': (context) => const CreateUser(),
@@ -31,6 +34,13 @@ class MyApp extends StatelessWidget {
 
         //* Home
         '/home': (context) => MyHomePage(),
+
+        //* Recompensa diaria
+        '/home/daily_reward': (context) => DailyReward(),
+        '/home/lista': (context) => Lista(),
+
+        //* Minijuegos
+        '/minigames': (context) => Minigames(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

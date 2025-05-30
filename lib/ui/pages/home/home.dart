@@ -2,9 +2,10 @@ import 'package:dog1/ui/widgets/home/app_bar.dart';
 import 'package:dog1/ui/widgets/home/bottom_nav_bar.dart';
 import 'package:dog1/ui/widgets/home/btn_park.dart';
 import 'package:dog1/ui/widgets/home/popup_minigames.dart';
+import 'package:dog1/ui/pages/home/daily_reward.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
-//import 'package:babylonjs_viewer/babylonjs_viewer.dart';
+import 'package:dog1/services/firebase_service.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -14,10 +15,28 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
+  void initState() {
+    super.initState();
+    _checkDailyReward();
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Future<void> _checkDailyReward() async {
+    final firebaseService = FirebaseService();
+    final isAllowed = await firebaseService.checkDailyReward();
+
+    if (!isAllowed) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => DailyReward()),
+        );
+      });
+    }
   }
 
   @override

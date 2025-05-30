@@ -64,6 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '56402290904',
     projectId: 'blackdog-dev-6104f',
     storageBucket: 'blackdog-dev-6104f.firebasestorage.app',
+    androidClientId: '56402290904-b5a7o7vsc4sqlpgha1meprv8o5ecknqi.apps.googleusercontent.com',
     iosClientId: '56402290904-gj3npej1b4234avk49dutrdv1au51ao5.apps.googleusercontent.com',
     iosBundleId: 'com.example.dog1',
   );
@@ -74,6 +75,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '56402290904',
     projectId: 'blackdog-dev-6104f',
     storageBucket: 'blackdog-dev-6104f.firebasestorage.app',
+    androidClientId: '56402290904-b5a7o7vsc4sqlpgha1meprv8o5ecknqi.apps.googleusercontent.com',
     iosClientId: '56402290904-gj3npej1b4234avk49dutrdv1au51ao5.apps.googleusercontent.com',
     iosBundleId: 'com.example.dog1',
   );
@@ -87,4 +89,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'blackdog-dev-6104f.firebasestorage.app',
     measurementId: 'G-CBT1TSRRVX',
   );
+
 }

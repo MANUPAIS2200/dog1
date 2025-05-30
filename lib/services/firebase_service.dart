@@ -9,6 +9,47 @@ class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  Future<List> getUsers() async {
+    List users = [];
+    CollectionReference collectionReferenceUsers = _db.collection('usuarios');
+
+    QuerySnapshot queryUsers = await collectionReferenceUsers.get();
+
+    queryUsers.docs.forEach((documento) {
+      users.add(documento.data());
+    });
+    return users;
+  }
+
+  Future<bool> checkDailyReward() async {
+    final String userId = '3D6JKLnpt2WcTDrU11cU3TllMrp1';
+
+    final doc = await _db.collection('usuarios').doc(userId).get();
+    final data = doc.data();
+
+    if (data == null || data['last_daily_reward'] == null) {
+      return false;
+    }
+
+    final Timestamp lastClaimed = data['last_daily_reward'];
+    final DateTime lastDate = lastClaimed.toDate();
+    final DateTime now = DateTime.now();
+
+    final isSameDay = lastDate.year == now.year &&
+        lastDate.month == now.month &&
+        lastDate.day == now.day;
+
+    return isSameDay;
+  }
+
+  Future<void> setDailyRewardClaimed() async {
+    final String userId = '3D6JKLnpt2WcTDrU11cU3TllMrp1';
+
+    await _db.collection('usuarios').doc(userId).update({
+      'last_daily_reward': FieldValue.serverTimestamp(),
+    });
+  }
+
   Future<String?> registerUser({
     required String nombre,
     required String email,
