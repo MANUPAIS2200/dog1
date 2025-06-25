@@ -3,24 +3,28 @@ import 'package:flutter/material.dart';
 class Minigames extends StatelessWidget {
   final List<Map<String, dynamic>> minijuegos = [
     {
-      'titulo': 'Puzzle',
-      'imagen': 'assets/minigames/menu/ej1.png',
-      'color': Color.fromARGB(255, 143, 151, 252)
+      'titulo': 'Memotest',
+      'imagen': 'assets/minigames/menu/ej2.png',
+      'color': Color.fromARGB(255, 143, 151, 252),
+      'route': '/minigames/memotest'
     },
     {
-      'titulo': 'Memoria',
-      'imagen': 'assets/minigames/menu/ej2.png',
-      'color': Color.fromARGB(255, 177, 95, 209)
+      'titulo': 'Puzzle',
+      'imagen': 'assets/minigames/menu/ej1.png',
+      'color': Color.fromARGB(255, 177, 95, 209),
+      'route': '/minigames/memotest'
     },
     {
       'titulo': 'Sopa de letras',
       'imagen': 'assets/minigames/menu/ej3.png',
-      'color': Color.fromARGB(255, 199, 243, 140)
+      'color': Color.fromARGB(255, 199, 243, 140),
+      'route': '/minigames/memotest'
     },
     {
       'titulo': 'Rompecabezas',
       'imagen': 'assets/minigames/menu/ej4.png',
-      'color': Color.fromARGB(255, 252, 189, 138)
+      'color': Color.fromARGB(255, 252, 189, 138),
+      'route': '/minigames/memotest'
     },
   ];
 
@@ -43,8 +47,7 @@ class Minigames extends StatelessWidget {
             children: minijuegos.map((juego) {
               return GestureDetector(
                 onTap: () {
-                  // Aquí puedes navegar al minijuego correspondiente
-                  print('Seleccionado: ${juego['titulo']}');
+                  Navigator.pushNamed(context, '${juego['route']}');
                 },
                 child: DecoratedBox(
                   decoration: BoxDecoration(
