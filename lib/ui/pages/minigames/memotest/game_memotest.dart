@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:dog1/ui/widgets/games/appBar.dart';
+import 'package:dog1/ui/widgets/games/memotest/score_overlay.dart';
+import 'package:dog1/ui/widgets/games/memotest/win.dart';
+import 'package:dog1/ui/widgets/games/memotest/animations/card_turn.dart';
+import 'package:dog1/services/games/firebase_service.dart';
 
 class GameMemotest extends StatefulWidget {
   final Map<String, dynamic> datos;
@@ -11,12 +15,68 @@ class GameMemotest extends StatefulWidget {
 }
 
 class _GameMemotestState extends State<GameMemotest> {
+  //* Variables:
+  // grid -> se usa para generar los cuadros del juego
+  // valores -> es una lista con el valor de cada carta, cada valor esta repetido para su carta pareja
+  // revelados -> representa al estado de la carta FALSE=volteada TRUE=revelada
+  // enJuego -> contiene un array con la informacion de la 1° y 2° carta [Valor,Pocision,Valor,Pocision]
+  // bloqueado se usa para evitar bug al abrir cartas rapidamente
   late int grid;
-  int points = 0;
   late List<int> valores;
   List<bool> revelados = [];
   List<int> enJuego = [];
   bool bloqueado = false;
+
+  //* Variables para sistema de puntos:
+  // point -> valor de punto base
+  // combo -> Funciona como multiplicador en rachas (opcional)
+  // pointsMade -> puntos generados en ultima jugada
+  // totalPoints -> total de puntos en juego
+  // lastPointsMade -> para mostrar el overlay temporal
+  // playerData -> Informnacion del usuario como Player
+  int point = 1;
+  int combo = 1;
+  int pointsMade = 0;
+  int totalPoints = 0;
+  int? lastPointsMade;
+  Map<String, dynamic>? playerData;
+
+  void loadPlayerData() async {
+    FirebaseService firebaseService = FirebaseService();
+    var data = await firebaseService.getPlayerByUserAndGame(
+      "3D6JKLnpt2WcTDrU11cU3TllMrp1",
+      "1",
+    );
+    setState(() {
+      playerData = data;
+      print("Datos del jugador: $playerData");
+      print(playerData!["points"]);
+    });
+  }
+
+  void resetGame() async {
+    for (int i = 0; i < revelados.length; i++) {
+      await Future.delayed(const Duration(milliseconds: 100)); // 1 segundo
+      setState(() {
+        revelados[i] = false;
+      });
+      await Future.delayed(const Duration(milliseconds: 500)); // 1 segundo
+    }
+
+    // Luego que se ocultaron todas, podés mezclar y resetear valores
+    setState(() {
+      valores = generarValoresMezclados();
+      totalPoints = 0;
+      combo = 1;
+    });
+  }
+
+  updatePoints(int totalPoints) async {
+    FirebaseService firebaseService = FirebaseService();
+    var data = await firebaseService.updatePoints(
+        "3D6JKLnpt2WcTDrU11cU3TllMrp1", "1", totalPoints);
+    return data;
+  }
 
   @override
   void initState() {
@@ -24,6 +84,7 @@ class _GameMemotestState extends State<GameMemotest> {
     grid = int.parse(widget.datos['grid']);
     valores = generarValoresMezclados();
     revelados = List.filled(grid * grid, false); // Todos ocultos
+    loadPlayerData();
   }
 
   List<int> generarValoresMezclados() {
@@ -60,32 +121,53 @@ class _GameMemotestState extends State<GameMemotest> {
       bloqueado = true;
 
       if (enJuego[0] == enJuego[2]) {
-        //* Desbloquear aunque coincidan
-        points++;
-        bloqueado = false;
+        //* Success
+        pointsMade = point * combo;
+        totalPoints += pointsMade;
+        showScoreOverlay(pointsMade);
+        combo++;
       } else {
-        //* Esperar 1 segundo antes de ocultar las cartas
-        await Future.delayed(const Duration(seconds: 1));
-
+        //! Fail
+        await Future.delayed(
+            const Duration(seconds: 1)); //1s antes de revelar cartas
+        combo = 1;
         setState(() {
           revelados[enJuego[1]] = false;
           revelados[enJuego[3]] = false;
         });
-
-        bloqueado = false;
       }
-
+      pointsMade = 0;
+      bloqueado = false;
       enJuego.clear();
+      if (revelados.every((elemento) => elemento)) {
+        var data = await updatePoints(totalPoints);
+        await modalWin(context, totalPoints, data!["points"]);
+        resetGame();
+      }
     }
+  }
+
+  void showScoreOverlay(int score) {
+    setState(() {
+      lastPointsMade = score;
+    });
+
+    Future.delayed(const Duration(milliseconds: 900), () {
+      setState(() {
+        lastPointsMade = null;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.datos['id_game']);
+    //print(widget.datos['id_game']);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const AppBarGames(
-          id_game: 1, id_player: '3D6JKLnpt2WcTDrU11cU3TllMrp1'),
+      appBar: AppBarGames(
+          id_game: 1,
+          id_player: '3D6JKLnpt2WcTDrU11cU3TllMrp1',
+          totalPoints: totalPoints),
       body: Center(
         child: SizedBox(
           height: 400,
@@ -119,124 +201,24 @@ class _GameMemotestState extends State<GameMemotest> {
               ),
             ),
             Expanded(
-              child: Text(
-                '$points',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Text(
+                    '$totalPoints',
+                    style: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  if (lastPointsMade != null)
+                    ScoreOverlay(
+                      scoreDelta: lastPointsMade!,
+                      onComplete: () => setState(() => lastPointsMade = null),
+                    ),
+                ],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CartaAnimada extends StatefulWidget {
-  final bool revelada;
-  final String valor;
-  final VoidCallback onTap;
-
-  const CartaAnimada({
-    super.key,
-    required this.revelada,
-    required this.valor,
-    required this.onTap,
-  });
-
-  @override
-  State<CartaAnimada> createState() => _CartaAnimadaState();
-}
-
-class _CartaAnimadaState extends State<CartaAnimada>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  late Animation<double> _escalaAnimada;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    );
-
-    _animation = Tween<double>(begin: 0, end: 1).animate(_controller);
-
-    // ⬇️ Esta parte INICIALIZA _escalaAnimada correctamente
-    _escalaAnimada = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween(begin: 1.0, end: 1.2), weight: 50),
-      TweenSequenceItem(tween: Tween(begin: 1.2, end: 1.0), weight: 50),
-    ]).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
-  }
-
-  @override
-  void didUpdateWidget(CartaAnimada oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.revelada != widget.revelada) {
-      if (widget.revelada) {
-        _controller.forward();
-      } else {
-        _controller.reverse();
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  Widget _buildCara({required bool revelada}) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        image: DecorationImage(
-          image: AssetImage(
-            revelada
-                ? 'assets/minigames/memotest/carta${widget.valor}.png'
-                : 'assets/minigames/memotest/carta_oculta.png',
-          ),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, child) {
-          double angulo = _animation.value * pi;
-          bool mostrarCaraRevelada = angulo > (pi / 2);
-
-          return ScaleTransition(
-            scale:
-                _escalaAnimada, // ⬅️ Esto hace que la carta se agrande y achique
-            child: Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY(angulo), // ⬅️ Esto gira la carta en eje Y
-              child: mostrarCaraRevelada
-                  ? Transform(
-                      alignment: Alignment.center,
-                      transform:
-                          Matrix4.rotationY(pi), // ⬅️ Voltea la cara revelada
-                      child: _buildCara(revelada: true),
-                    )
-                  : _buildCara(revelada: false),
-            ),
-          );
-        },
       ),
     );
   }
