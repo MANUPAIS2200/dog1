@@ -11,7 +11,9 @@ import 'pages/auth/welcome.dart';
 import 'pages/home/home.dart';
 import 'pages/home/daily_reward.dart';
 import 'pages/home/lista.dart';
-import 'pages/minigames/minigames.dart';
+import 'pages/minigames/minigames.dart'; // <- Menu de jugos
+import 'pages/minigames/memotest/memotest.dart'; // v v Juegos v v
+import 'pages/minigames/memotest/game_memotest.dart'; // Memotest
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Black Dog',
-      initialRoute: '/minigames',
+      initialRoute: '/minigames/memotest',
       routes: {
         //* Login y registro
         '/login': (context) => const LoginPage(),
@@ -41,6 +43,23 @@ class MyApp extends StatelessWidget {
 
         //* Minijuegos
         '/minigames': (context) => Minigames(),
+        '/minigames/memotest': (context) => MinigamesMemotest(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/minigames/memotest/game') {
+          final args = settings.arguments
+              as Map<String, dynamic>?; // Obtener parámetros enviados
+          if (args != null) {
+            return MaterialPageRoute(
+              builder: (context) {
+                return GameMemotest(
+                    datos: args); // Pasamos los datos a la página
+              },
+            );
+          }
+        }
+        // Si la ruta no es '/minigames/memotest/game', retornamos null para manejarla normalmente.
+        return null;
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
